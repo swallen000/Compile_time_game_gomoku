@@ -22,10 +22,10 @@ do
             keyboard='Down'
         elif [ $input == '[C' ]
         then
-            keyboard='Right'
+            keyboard='R'
         elif [ $input == '[D' ]
         then
-            keyboard='Left'
+            keyboard='L'
         elif [ $input = " " ] 
         then
             keyboard='Space'
@@ -39,5 +39,6 @@ do
             break
         fi
     done
+    #clear
     echo $(./main) > current.txt
 done
