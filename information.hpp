@@ -78,7 +78,7 @@ constexpr bool move_chessboard(T& input, int& x, int& y){
 }
 
 
-int read_input(){
+constexpr int read_input(){
     auto first_line = test_string.substr<1, column>();
     auto last_line = test_string.substr<(row-2)*(column+1)+1, 18>();
     auto cursor_line = test_string.substr<(row-2)*(column+1)+1, 18>();
