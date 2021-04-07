@@ -10,11 +10,12 @@ int main(){
     //test_string.print_sequence();
 
     set_array();
-    read_input();
+    
     //set_array_sv();
     /*for(int i=0; i<game_string.size(); ++i){
         cout<<i<<" "<<game_string[i]<<endl;
     }*/
 
-    //read_input_sv();   
+    //read_input_sv(); 
+    return read_input();  
 }

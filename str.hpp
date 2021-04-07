@@ -97,7 +97,6 @@ public:
 
     
 protected:
-
     static constexpr auto sequence = std::make_index_sequence<N>{};
 private:
     char arr[N];

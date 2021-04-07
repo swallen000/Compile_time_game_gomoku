@@ -11,4 +11,6 @@ R"(
 9                  
                    
 now position: 1 1
+player 1's turn
+Game moving on...
 )"
