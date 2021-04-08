@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
 
-
-
 clear
 IFS=
 keyboard='Empty'
 
-chr() {
-  [ "$1" -lt 256 ] || return 1
-  printf "\\$(printf '%03o' "$1")"
-}
+filename='input.txt'
 
-for value in Top Top Left Top
-do
+while read value; do 
     g++ -O3 -std=c++2a main.cpp -DInput=$value -o main
     ./main
     res=$?
@@ -35,4 +29,4 @@ do
     fi
     echo $(./main)
     echo $(./main) > current.txt
-done
+done < 'input.txt'
