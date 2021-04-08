@@ -27,6 +27,8 @@ while read value; do
         echo "      ---------------------------"
         break
     fi
-    echo $(./main)
-    echo $(./main) > current.txt
+    var="R\"(\n"
+    var+=$(./main)
+    var+="\n)\""
+    echo -e "$var" > current.txt
 done < $filename
