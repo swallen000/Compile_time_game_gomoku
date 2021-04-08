@@ -16,39 +16,39 @@ constexpr void set_array_sv(){
 
 constexpr void set_array(){
     int current = 0;
-    auto sub1 = game_string.substr(1*(column+1)+1, column);
+    auto sub1 = test_string.substr<1*(column+1)+1, column>();
     for(int j=0; j<column; ++j)
             chessboard[current][j] = sub1[j];
     current++;
-    auto sub2 = game_string.substr(2*(column+1)+1, column);
+    auto sub2 = test_string.substr<2*(column+1)+1, column>();
     for(int j=0; j<column; ++j)
             chessboard[current][j] = sub2[j];
     current++;
-    auto sub3 = game_string.substr(3*(column+1)+1, column);
+    auto sub3 = test_string.substr<3*(column+1)+1, column>();
     for(int j=0; j<column; ++j)
             chessboard[current][j] = sub3[j];
     current++;
-    auto sub4 = game_string.substr(4*(column+1)+1, column);
+    auto sub4 = test_string.substr<4*(column+1)+1, column>();
     for(int j=0; j<column; ++j)
             chessboard[current][j] = sub4[j];
     current++;
-    auto sub5 = game_string.substr(5*(column+1)+1, column);
+    auto sub5 = test_string.substr<5*(column+1)+1, column>();
     for(int j=0; j<column; ++j)
             chessboard[current][j] = sub5[j];
     current++;
-    auto sub6 = game_string.substr(6*(column+1)+1, column);
+    auto sub6 = test_string.substr<6*(column+1)+1, column>();
     for(int j=0; j<column; ++j)
             chessboard[current][j] = sub6[j];
     current++;
-    auto sub7 = game_string.substr(7*(column+1)+1, column);
+    auto sub7 = test_string.substr<7*(column+1)+1, column>();
     for(int j=0; j<column; ++j)
             chessboard[current][j] = sub7[j];
     current++;
-    auto sub8 = game_string.substr(8*(column+1)+1, column);
+    auto sub8 = test_string.substr<8*(column+1)+1, column>();
     for(int j=0; j<column; ++j)
             chessboard[current][j] = sub8[j];
     current++;
-    auto sub9 = game_string.substr(9*(column+1)+1, column);
+    auto sub9 = test_string.substr<9*(column+1)+1, column>();
     for(int j=0; j<column; ++j)
             chessboard[current][j] = sub9[j];
 }
@@ -100,8 +100,8 @@ constexpr int read_input(){
             std::cout<<"R\"(\n";
             first_line.print_sequence();
             std::cout<<"\n";
-            for(int i=0; i<chessboard.size(); ++i){
-                for(int j=0; j<chessboard[i].size(); ++j)
+            for(int i=0; i<array_size; ++i){
+                for(int j=0; j<column; ++j)
                     std::cout<<chessboard[i][j];
                 std::cout<<"\n";
             }
@@ -112,19 +112,19 @@ constexpr int read_input(){
         }
         else{
             if(input == User_Input::Space){
-		        if (p == 1)
-                	chessboard[y-1][x*2] = 'O';
-		        else if (p == 2)
-			        chessboard[y-1][x*2] = '@';
-		        placed = true;
-	        } 
+                if (p == 1)
+                    chessboard[y-1][x*2] = 'O';
+                else if (p == 2)
+                    chessboard[y-1][x*2] = '@';
+                placed = true;
+            } 
             else if(chessboard[y-1][x*2] != 'O' && chessboard[y-1][x*2] != '@')
                 chessboard[y-1][x*2] = '+';
             std::cout<<"R\"(\n";
             first_line.print_sequence();
             std::cout<<"\n";
-            for(int i=0; i<chessboard.size(); ++i){
-                for(int j=0; j<chessboard[i].size(); ++j)
+            for(int i=0; i<array_size; ++i){
+                for(int j=0; j<column; ++j)
                     std::cout<<chessboard[i][j];
                 std::cout<<"\n";
             }
@@ -184,32 +184,41 @@ constexpr int read_input_sv(){
         //std::cout<<x<<" "<<y<<"@\n";
         bool flag = move_chessboard(input,x ,y);
         if(flag == false){
-            //to do
-        }
-        else{
-            if(input == User_Input::Space){
-		if (p == 1)
-                	chessboard[y-1][x*2] = 'O';
-		else if (p == 2)
-			chessboard[y-1][x*2] = '@';
-		placed = true;
-	    } else if(chessboard[y-1][x*2] != 'O' && chessboard[y-1][x*2] != '@')
-                chessboard[y-1][x*2] = '+';
             std::cout<<"R\"(\n"<<first_line<<"\n";
-            for(int i=0; i<chessboard.size(); ++i){
-                for(int j=0; j<chessboard[i].size(); ++j)
+            for(int i=0; i<array_size; ++i){
+                for(int j=0; j<column; ++j)
                     std::cout<<chessboard[i][j];
                 std::cout<<"\n";
             }
             for(int i=0; i<column; ++i)
                 std::cout<<" ";
             std::cout<<"\nnow position: "<<x<<" "<<y<<"\n";
-	    if (p == 1 && placed == true)
-	    	std::cout<<"player 2's turn\n";
-	    else if (p == 2 && placed == true)
-		    std::cout<<"player 1's turn\n";
-	    else
-		    std::cout<<"player "<<p<<"'s turn\n";
+            std::cout<<"player "<<p<<"'s turn\n";
+        }
+        else{
+            if(input == User_Input::Space){
+        if (p == 1)
+                    chessboard[y-1][x*2] = 'O';
+        else if (p == 2)
+            chessboard[y-1][x*2] = '@';
+        placed = true;
+        } else if(chessboard[y-1][x*2] != 'O' && chessboard[y-1][x*2] != '@')
+                chessboard[y-1][x*2] = '+';
+            std::cout<<"R\"(\n"<<first_line<<"\n";
+            for(int i=0; i<array_size; ++i){
+                for(int j=0; j<column; ++j)
+                    std::cout<<chessboard[i][j];
+                std::cout<<"\n";
+            }
+            for(int i=0; i<column; ++i)
+                std::cout<<" ";
+            std::cout<<"\nnow position: "<<x<<" "<<y<<"\n";
+        if (p == 1 && placed == true)
+            std::cout<<"player 2's turn\n";
+        else if (p == 2 && placed == true)
+            std::cout<<"player 1's turn\n";
+        else
+            std::cout<<"player "<<p<<"'s turn\n";
         }
     }
     int result = judge(x, y, p, placed);

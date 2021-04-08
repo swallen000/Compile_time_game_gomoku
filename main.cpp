@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(){
-    static_assert(game_string.size() > 0, "game string is null!");
+    //static_assert(game_string.size() > 0, "game string is null!");
     static_assert(array_size > 0, "incorrect array size");
     //test_string.print_sequence();
 
