@@ -252,11 +252,15 @@ for(std::size_t i=0; i<9; ++i)
 ```
 If we can see what is wrong in compile time, we should not wait until run time.
 
+#### Using game view directly as game model input
+
+Our game view shows on the terminal, and the terminal may have other message on it. It is error-phone if we 
+
 ### What we have learned
 * C++ is very powerful
 * using static_assert to help debug when we tried to write functions in compile-time
 * template mega recursions have limited depth, we can use compile flag ```-ftemplate-depth=``` to set required depth. However, due to the compiler limitation and hardware limitation, we can set the value arbitrarily high as we want.
-* 
+
 
 ### Future Work
 #### Implement an AI player, so that a user can play with the computer.
