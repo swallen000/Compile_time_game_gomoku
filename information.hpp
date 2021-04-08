@@ -97,6 +97,18 @@ constexpr int read_input(){
     if(cursor_line[0] == 'n'){
         bool flag = move_chessboard(input,x ,y);
         if(flag == false){
+            std::cout<<"R\"(\n";
+            first_line.print_sequence();
+            std::cout<<"\n";
+            for(int i=0; i<chessboard.size(); ++i){
+                for(int j=0; j<chessboard[i].size(); ++j)
+                    std::cout<<chessboard[i][j];
+                std::cout<<"\n";
+            }
+            for(int i=0; i<column; ++i)
+                std::cout<<" ";
+            std::cout<<"\nnow position: "<<x<<" "<<y<<"\n";
+            std::cout<<"player "<<p<<"'s turn\n";
         }
         else{
             if(input == User_Input::Space){
