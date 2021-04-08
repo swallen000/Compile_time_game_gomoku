@@ -45,8 +45,8 @@
 ```
 
 ### Manual
-:black_circle: :arrow_left: :arrow_down: `+`
-:white_circle: :arrow_right: :arrow_up:  `space`
+:black_circle: :arrow_left: :arrow_down: `+` <br>
+:white_circle: :arrow_right: :arrow_up:  `space` <br>
 1. Dowload Compile **Time Game: Gomoku** from GitHub
     `git clone  https://github.com/swallen000/Compile_time_game_gomoku.git`
 
