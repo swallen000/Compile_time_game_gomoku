@@ -29,4 +29,4 @@ while read value; do
     fi
     echo $(./main)
     echo $(./main) > current.txt
-done < 'input-repete.txt'
+done < $filename
