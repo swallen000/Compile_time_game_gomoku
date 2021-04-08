@@ -97,7 +97,7 @@ constexpr int read_input(){
     if(cursor_line[0] == 'n'){
         bool flag = move_chessboard(input,x ,y);
         if(flag == false){
-            std::cout<<"R\"(\n";
+            //std::cout<<"R\"(\n";
             first_line.print_sequence();
             std::cout<<"\n";
             for(int i=0; i<array_size; ++i){
@@ -120,7 +120,7 @@ constexpr int read_input(){
             } 
             else if(chessboard[y-1][x*2] != 'O' && chessboard[y-1][x*2] != '@')
                 chessboard[y-1][x*2] = '+';
-            std::cout<<"R\"(\n";
+            //std::cout<<"R\"(\n";
             first_line.print_sequence();
             std::cout<<"\n";
             for(int i=0; i<array_size; ++i){
@@ -142,21 +142,21 @@ constexpr int read_input(){
     int result = judge(x, y, p, placed);
     if(result==12){
         std::cout<<"DRAW!\n";
-        std::cout<<")\"";
+        //std::cout<<")\"";
         return 12;
     }
     else if(result==1){
         std::cout<<"O Win!\n";
-        std::cout<<")\"";
+        //std::cout<<")\"";
         return 1;
     } 
     else if(result==2){
         std::cout<<"@ Win!\n";
-        std::cout<<")\"";
+        //std::cout<<")\"";
         return 2;
     }
     else std::cout<<"Game moving on...\n";
-    std::cout<<")\"";
+    //std::cout<<")\"";
     return 0;
 }
 
@@ -184,7 +184,8 @@ constexpr int read_input_sv(){
         //std::cout<<x<<" "<<y<<"@\n";
         bool flag = move_chessboard(input,x ,y);
         if(flag == false){
-            std::cout<<"R\"(\n"<<first_line<<"\n";
+            //std::cout<<"R\"(\n"
+            std::cout<<first_line<<"\n";
             for(int i=0; i<array_size; ++i){
                 for(int j=0; j<column; ++j)
                     std::cout<<chessboard[i][j];
@@ -204,7 +205,8 @@ constexpr int read_input_sv(){
         placed = true;
         } else if(chessboard[y-1][x*2] != 'O' && chessboard[y-1][x*2] != '@')
                 chessboard[y-1][x*2] = '+';
-            std::cout<<"R\"(\n"<<first_line<<"\n";
+            //std::cout<<"R\"(\n"
+            std::cout<<first_line<<"\n";
             for(int i=0; i<array_size; ++i){
                 for(int j=0; j<column; ++j)
                     std::cout<<chessboard[i][j];
@@ -224,21 +226,21 @@ constexpr int read_input_sv(){
     int result = judge(x, y, p, placed);
     if(result==12){
         std::cout<<"DRAW!\n";
-        std::cout<<")\"";
+        //std::cout<<")\"";
         return 12;
     }
     else if(result==1){
         std::cout<<"O Win!\n";
-        std::cout<<")\"";
+        //std::cout<<")\"";
         return 1;
     } 
     else if(result==2){
         std::cout<<"@ Win!\n";
-        std::cout<<")\"";
+        //std::cout<<")\"";
         return 2;
     }
     else std::cout<<"Game moving on...\n";
-    std::cout<<")\"";
+    //std::cout<<")\"";
     return 0;
 }
 
