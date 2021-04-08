@@ -1,10 +1,10 @@
-# COMS 4995 final project
+# COMS 4995 final project⚪ ⚫ 
 
 ## Design document
 ### Motivation
 - C++ is one of the most powerful languages that can handle compile-time implementations and generic programming. Especially with the `template` and `constexpr` feature.
-- C++ evolution in C++ 17/20, more and more functions/data structures can be supported in compile-time. For example, one of the C++20 features is that in the future, both std::vector and std::string can be implemented during compile-time.
-- Given that the final project should be interesting and interactive, we decided to perform compile-time implementations via a Gomoku game instead of a specific library.
+- C++ evolution in C++ 17/20: more and more functions/data structures can be supported in compile-time. For example, one of the C++20 features is that in the future, both std::vector and std::string can be implemented during compile-time.
+- Given that the final project should be interesting and interactive, we decided to perform compile-time implementations via a Gomoku game.
 
 ### Different approach in compile-time game and run-time game:
 - Logic in run-time game:
@@ -14,7 +14,7 @@
 ![](https://i.imgur.com/2fttCp9.png)
 
 ### Major Design feature (of C++17/20):
-- template mega programming
+- template meta programming
 - std::string_view 
 - std::from_chars_result from_chars (stoi for string_view)
 - std::integer_sequence / std::index_sequence
@@ -33,7 +33,7 @@
 - [X] When the player select the same grid to place the stone, this move would be neglected. Remains the player's turn.
 
 #### Test user-defined STR correctness:
-```=
+```cpp=
     static_assert(STR("abc") == "abc", "sentence1 error");
     static_assert(STR("abc") == STR("abc"), "sentence2 error");
     static_assert( (STR("Hello")+STR(" ")+STR("World!")) ==  "Hello World!" , "sentence3 error" );
@@ -44,17 +44,138 @@
     static_assert( STR("Hello World!")[0] == 'H', "sentence7 error" );
 ```
 
+### Manual
+:black_circle: :arrow_left: :arrow_down: `+`
+:white_circle: :arrow_right: :arrow_up:  `space`
+1. Dowload Compile **Time Game: Gomoku** from GitHub
+    `git clone  https://github.com/swallen000/Compile_time_game_gomoku.git`
+
+2. Restore the game board to origin (no stones on the board).
+    `cp original.txt current.txt`
+
+3. Start the game!
+    * `bash ./input.sh`
+    * Use ⬆️ ⬅️ ⬇️ ➡️ to move the cursor(+).
+    * Press `space` to place a stone.
+
+4. (Optional) Run this if you want to see how the game works.
+    * `bash ./loop_input.sh`
+
 
 ### Tutorial
-#### How to start the compile-time game -> first we need to write a shell script
-```=
+#### How to construct a compile-time game -> first we need to write a shell script
+Here is the pseudo code:
+```python=
 $keyboard = "Empty"
 while :
-do
+    #user compile flag to pass user input
+    #Here, -DInput=$keyboard is equal to #define Input $keyboard in C++ file
     g++ -O3 -std=c++2a main.cpp -DInput=$keyboard -o main
-
-done
+    
+    #print chessboard current state
+    ehco (./main)
+    
+    
+    
+    while (not receive user input):
+        $keyboard = read user input
+        if $keyboard is not empty:
+            break
 ```
+
+#### User-defined string
+##### Why?
+Because we want to implement some functions that std::string_view doesn't provide (e.g.: concatenate multiple strings)
+
+##### some support functions:
+- substr 
+    - similar to string.substr(), but here we use template to pass the size of the new STR
+- starts_with
+    - STR("Michael Jordan").starts_with("Michael") 
+    - check whether the string starts with the given string
+- ends_with
+    - STR("Michael Jordan").ends_with("Jordan")
+    - similar to the function starts_with
+- print_sequence
+    - print all elements in the STR
+- size(), length()
+    - return current STR.size()
+- empty()
+    - check whether current STR is empty  
+- operator+
+    - support to concatenate STRS
+- operator==
+    - support to compare two STRS
+```cpp=
+//"Hello"
+STR("Hello World!").substr<0, 5>()
+
+//"World!"
+STR("Hello World!").substr<6>()
+
+//true
+STR("Michael Jordan").starts_with("Michael") 
+
+//true
+STR("Michael Jordan").ends_with("Jordan")
+
+//output: Design Using C++
+STR("Design Using C++").print_sequence()
+
+//"COMS 4995"
+STR("COMS")+STR(" ")+STR("4995")
+
+//"Columbia University"
+constexpr STR a = "Columbia "
+constexpr STR b = "University"
+(a+b).print_sequence()
+```
+
+#### How we construct the class STR
+```cpp=
+template <std::size_t N>
+class STR{
+public:
+    template <typename... Characters>
+    constexpr STR( Characters... characters )
+        : arr{ characters...}{
+    }
+
+    template<std::size_t ..._N>
+    constexpr STR( const char(&rhs)[N], const std::index_sequence<_N...> rhs_sequence )
+        : STR( rhs[_N]...){
+
+    }
+
+    constexpr STR( const char(&a)[N] )
+        : STR( a, std::make_index_sequence<N-1>{} ){
+
+    }
+
+    constexpr char operator[]( const std::size_t pos ) const{
+        return pos < N-1 ? arr[pos] : throw std::out_of_range("Index out of range");
+    }
+
+    constexpr STR(const char* a, std::size_t size)
+        : arr{}{
+        for (std::size_t i = 0; i < size; ++i) {
+            arr[i] = a[i];
+        }
+    }
+
+    template<std::size_t start, std::size_t length>
+    constexpr auto substr() const{
+        if( start >= N - 1 || start + length >= N )
+            throw std::out_of_range("Index out of range");
+        STR<length+1> ans(arr + start, length);
+        return ans;
+    }
+    
+private:
+    char arr[N];
+};
+```
+
 
 ### Mesurement
 #### compile time
@@ -72,11 +193,35 @@ constexpr STR test_str = STR("Design ")+STR("Using ")+STR("C++");
 ```
 - Conclusion: if you don't need the function to support concatenating multiple strings, using std::string_view would be more efficient
 
+#### In-Memory vs On-Disk Game States
+testing OS: macOS Big Sur
+compiler: Apple clang version 12.0.0 (clang-1200.0.32.29)
+
+We save the game states as a file, so we need to read from and write into it once per player turn. We want to see if these operations can be less expensive by using an in-memory file system. 
+
+We compare two scenarios. In the first scenario, the game state is a file on the disk. In the other scenario, the game state is a file on an in-memory file system. For each scenario, we use the `time` command to collect data for 10 player turns and calculate the corresponding statistics.
+
+| On Disk       | AVE   | STD   |
+|---------------|-------|-------|
+| compile       | 1.80  | 0.11  |
+| write to file | 0.019 | 0.004 |
+
+| In Memory     | AVE   | STD   |
+|---------------|-------|-------|
+| compile       | 1.69  | 0.14  |
+| write to file | 0.019 | 0.006 |
+
+As a result, there's no significant difference between the two scenarios. It seems that the cache is functioning well for the purpose of our tasks. The fact that our game states are only hundreds of bytes is probably why an in-memory file system is no better than a disk file system. The game states can stay in memory and has low access cost while being a file on the disk.
+
+
+
+
+
 ### Reference
-- https://github.com/Jiwan/meta_crush_saga
 - https://stackoverflow.com/questions/20874388/error-spliting-an-stdindex-sequence
 - https://gist.github.com/dominicusin/b4008ab9895240f615be6a886eb81829
 - https://gist.github.com/dsanders11/8951887
 - https://en.cppreference.com/w/cpp/string/basic_string_view
 - https://en.cppreference.com/w/cpp/utility/integer_sequence
-- 
+- https://github.com/Jiwan/meta_crush_saga
+- https://gist.github.com/rxaviers/7360908
