@@ -65,7 +65,7 @@
 ### Tutorial
 #### How to construct a compile-time game -> first we need to write a shell script
 Here is the pseudo code:
-```python=
+```python
 $keyboard = "Empty"
 while :
     #user compile flag to pass user input
