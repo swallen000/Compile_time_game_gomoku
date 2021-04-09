@@ -397,9 +397,9 @@ In terms of the **model-view-controller** (MVC) design pattern, our view is the 
 Ideally, what is displayed to the user should be separated from the internal representation, or the internal game states, to allow the development of more complex games. However, we didn't make this the nature of our design.
 
 ### Reference
-[Error spliting an std::index_sequence](https://stackoverflow.com/questions/20874388/error-spliting-an-stdindex-sequence)
-[Compile-time strings and string concatenation](https://gist.github.com/dominicusin/b4008ab9895240f615be6a886eb81829)
-[dsanders11/StringConstant.h](https://gist.github.com/dsanders11/8951887)
-[std::basic_string_view](https://en.cppreference.com/w/cpp/string/basic_string_view)
-[std::integer_sequence](https://en.cppreference.com/w/cpp/utility/integer_sequence)
-[Jiwan/meta_crush_saga](https://github.com/Jiwan/meta_crush_saga)
+[Error spliting an std::index_sequence](https://stackoverflow.com/questions/20874388/error-spliting-an-stdindex-sequence) <br>
+[Compile-time strings and string concatenation](https://gist.github.com/dominicusin/b4008ab9895240f615be6a886eb81829) <br>
+[dsanders11/StringConstant.h](https://gist.github.com/dsanders11/8951887) <br>
+[std::basic_string_view](https://en.cppreference.com/w/cpp/string/basic_string_view) <br>
+[std::integer_sequence](https://en.cppreference.com/w/cpp/utility/integer_sequence) <br>
+[Jiwan/meta_crush_saga](https://github.com/Jiwan/meta_crush_saga) <br>
