@@ -33,7 +33,7 @@
 - [X] When the player select the same grid to place the stone, this move would be neglected. Remains the player's turn.
 
 #### Test user-defined STR correctness:
-```cpp=
+```cpp
     static_assert(STR("abc") == "abc", "sentence1 error");
     static_assert(STR("abc") == STR("abc"), "sentence2 error");
     static_assert( (STR("Hello")+STR(" ")+STR("World!")) ==  "Hello World!" , "sentence3 error" );
