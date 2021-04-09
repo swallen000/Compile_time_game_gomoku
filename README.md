@@ -106,7 +106,7 @@ Because we want to implement some functions that std::string_view doesn't provid
     - support to concatenate STRS
 - operator==
     - support to compare two STRS
-```cpp=
+```cpp
 //"Hello"
 STR("Hello World!").substr<0, 5>()
 
@@ -132,7 +132,7 @@ constexpr STR b = "University"
 ```
 
 #### How we construct the class STR
-```cpp=
+```cpp
 template <std::size_t N>
 class STR{
 public:
