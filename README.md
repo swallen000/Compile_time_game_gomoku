@@ -204,7 +204,7 @@ Compile command: g++ -O3 -std=c++2a
 - Running 10000000 times when try to get the substr to STR and std: string_view: string_view is 3 times faster than user-defined string
 (user-defined string: 42593µs, std::string_view: 14619µs
 - However, STR support "+" operator, that is, we can concatenate multple STRs together. For example:
-```=
+```cpp
 constexpr STR test_str = STR("Design ")+STR("Using ")+STR("C++");
 ```
 - Conclusion: if you don't need the function to support concatenating multiple strings, using std::string_view would be more efficient
