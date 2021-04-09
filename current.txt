@@ -1,6 +1,6 @@
 R"(
   1 2 3 4 5 6 7 8 9
-1     +            
+1 +                
 2                  
 3                  
 4                  
@@ -10,7 +10,7 @@ R"(
 8                  
 9                  
                    
-now position: 3 1
+now position: 1 1
 player 1's turn
 Game moving on...
 )"

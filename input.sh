@@ -69,9 +69,5 @@ do
     var="R\"(\n"
     var+=$(./main)
     var+="\n)\""
-    #echo "R\\" > current.txt
-    #echo "\n" > current.txt
-    #echo $(./main) > current.txt
-    #echo ")" > current.txt
     echo -e "$var" > current.txt
 done

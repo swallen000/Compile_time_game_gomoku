@@ -18,8 +18,6 @@ constexpr auto game_string = std::string_view(
     #include "current.txt"
 );
 
-//constexpr auto test_string = STR("");
-
 constexpr auto test_string = STR(
     #include "current.txt"
 );
@@ -29,4 +27,3 @@ constexpr std::size_t row = array_size + 4;
 constexpr std::size_t column = array_size*2+1;
 
 std::array<std::array<char, column>, array_size> chessboard;
-// char chessboard[array_size][column] = {};

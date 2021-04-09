@@ -19,28 +19,11 @@ public:
         //std::cout<<N;
         for(size_t i = 0; i<N - 1; ++i)
             std::cout << arr[i];
-        //std::cout<<"\n";
     }
 
-    /*constexpr STR()
-        : arr{}{
-    }*/
-
-    template <typename... Characters>
-    constexpr STR( Characters... characters )
-        : arr{ characters...}{
-    }
-    
-    template<std::size_t M, std::size_t ..._N>
-    constexpr STR( STR<M>& rhs, std::index_sequence<_N...>)
-        : STR( rhs[_N]...){
-
-    }
-
-    template<std::size_t ..._N>
-    constexpr STR( STR<N>& rhs, std::index_sequence<_N...> )
-        : STR( rhs[_N]...){
-
+    template <typename... Elements>
+    constexpr STR( Elements... elements )
+        : arr{ elements...}{
     }
 
     template<std::size_t ..._N>
@@ -65,12 +48,12 @@ public:
     }
 
     constexpr std::size_t length() const {
-        return N-1;//sequence.size() - 1;
+        return N-1;
     }
 
 
     constexpr std::size_t size() const {
-        return N-1;//sequence.size() - 1;
+        return N-1;
     }
     
     constexpr bool empty() const{
@@ -79,7 +62,7 @@ public:
 
     constexpr STR(const char* a, std::size_t size)
         : arr{}{
-        for (std::size_t i = 0; i < N && i < size; ++i) {
+        for (std::size_t i = 0; i < size; ++i) {
             arr[i] = a[i];
         }
     }
@@ -119,7 +102,6 @@ public:
         if(size > end+1)
             return false;
         for(std::size_t i=0; i<size - 1; ++i){
-            //std::cout<<s[size-2-i]<<arr[end -1 - i];
             if(s[size-2-i] != arr[end - 1 - i]){
                 return false;
             }
@@ -128,7 +110,6 @@ public:
     }
     
 private:
-    //static constexpr auto sequence = std::make_index_sequence<N>{};
     char arr[N];
 };
 
@@ -156,8 +137,8 @@ constexpr auto Add( const L& lhs, const R& rhs, std::index_sequence<posL...>, st
     return STR<sizeof...(posL) + sizeof...(posR)>( lhs[posL]..., rhs[posR]... );
 }
 
-template <typename L, typename R, std::size_t... posL, std::size_t... posR>
-    constexpr auto operator+( const L& lhs, const R& rhs ){
-        return Add( lhs, rhs, std::make_index_sequence<sizeof(lhs)-1>{}, std::make_index_sequence<sizeof(rhs)>{} );
-    }
+template <typename L, typename R>
+constexpr auto operator+( const L& lhs, const R& rhs ){
+    return Add( lhs, rhs, std::make_index_sequence<sizeof(lhs)-1>{}, std::make_index_sequence<sizeof(rhs)>{} );
+}
 
