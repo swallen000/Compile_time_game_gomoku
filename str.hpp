@@ -23,12 +23,13 @@ public:
 
     template <typename... Elements>
     constexpr STR( Elements... elements )
-        : arr{ elements...}{
+        : arr{ elements... }{
+
     }
 
     template<std::size_t ..._N>
-    constexpr STR( const char(&rhs)[N], const std::index_sequence<_N...> rhs_sequence )
-        : STR( rhs[_N]...){
+    constexpr STR( const char(&rhs)[N], const std::index_sequence<_N...> )
+        : STR( rhs[_N]... ){
 
     }
 
@@ -141,4 +142,3 @@ template <typename L, typename R>
 constexpr auto operator+( const L& lhs, const R& rhs ){
     return Add( lhs, rhs, std::make_index_sequence<sizeof(lhs)-1>{}, std::make_index_sequence<sizeof(rhs)>{} );
 }
-
