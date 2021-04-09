@@ -23,7 +23,7 @@
 
 #### How to construct a compile-time game -> first we need to write a shell script
 Here is the pseudo code:
-```python=
+```python
 $keyboard = "Empty"
 while :
     #user compile flag to pass user input
@@ -42,14 +42,14 @@ while :
 ```
 
 #### How to read file and save
-```cpp=
+```cpp
 constexpr auto my_string = std::string_view(
     #include "file.txt"
 );
 ```
 File should be written like this:
 (The chars should all be in the ASCII Table.)
-```cpp=
+```cpp
 R"(
 your data...
 )"
@@ -86,7 +86,7 @@ my_string = ['y', 'o', 'u', 'r', ' ', 'd', 'a', 't', 'a', '.', '.', '.', '\n']
     - support to concatenate STRS
 - operator==
     - support to compare two STRS
-```cpp=
+```cpp
 //"Hello"
 STR("Hello World!").substr<0, 5>()
 
@@ -113,7 +113,7 @@ constexpr STR b = "University"
 
 #### How we construct the class STR (using template)
 First, we need a constructor, that is, we can load information from char array.
-```cpp=
+```cpp
 template <std::size_t N>
 class STR{
 public:
@@ -143,7 +143,7 @@ private:
 };
 ```
 Sample implementation of substr() function
-```cpp=
+```cpp
 template <std::size_t N>
 class STR{
 public:
@@ -214,7 +214,7 @@ Here we want to show you how to implement a minimal compile-time game. We would 
 
 For the purpose of this example, we only want to count the times of win, lose and draw, which means a file with the following content suffices:
 
-```cpp=
+```cpp
 R"(
 0
 0
@@ -230,7 +230,7 @@ Assume that we have a PRNG called `compile_time_random()` that can be called dur
 
 Now take a look at the following conceptual code. Noted that 1) the game states will be "something like a string", 2) there's a magical variable `input` representing the user input, and 3) you need to `cout` the game states for the next step.
 
-```cpp=
+```cpp
 constexpr int rock_paper_scissors(){
     int computer = compile_time_random() % 3;
     // 0 means rock, 1 means paper, and 2 means scissors
@@ -265,13 +265,13 @@ There is a magical variable `input` actually comes from the compile flag `-DInpu
 
 Noted that you will "update" the game states by the `echo` command in the last line, which is read during the compile time by using
 
-```cpp=
+```cpp
 constexpr auto game_string = std::string_view( 
 #include "states.txt"
 );
 ```
 
-```shell=
+```shell
 IFS=
 keyboard='Empty'
 
@@ -367,13 +367,13 @@ As a result, there's no significant difference between the two scenarios. It see
 #### Using in-memory file systems or memory-mapped file seems like a premature optimization.
 
 #### Using non const/constexpr element to pass into template
-```cpp=
+```cpp
 for(std::size_t i=0; i<9; ++i)
     constexpr auto str = game_string.substr<i, column_size>();
 ```
 
 #### Using std::cout to debug
-```cpp=
+```cpp
 (X) std::cout << string;
 (O) static_asser(string == "O @ O @", "string comparison error")
 ```
