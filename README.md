@@ -1,5 +1,7 @@
 # Compile Game- Gomoku⚪ ⚫ 
 
+For the report part, please see our [Report](https://github.com/swallen000/Compile_time_game_gomoku/blob/main/Report.md).
+
 ## Motivation
 - C++ is one of the most powerful languages that can handle compile-time implementations and generic programming. Especially with the `template` and `constexpr` feature.
 - C++ evolution in 17/20: more and more functions/data structures can be supported in compile-time. For example, one of the C++20 features is that in the future, both std::vector and std::string can be implemented during compile-time (not yet supported by current compilers).
