@@ -4,6 +4,7 @@ clear
 IFS=
 keyboard='Empty'
 
+# change here to see different moves and esults (input-*.txt)
 filename='input.txt'
 
 while read value; do 
